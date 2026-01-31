@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Biblioteca Digital (Kindle Dark)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Pesquisador Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilos Base Kindle Dark */
+        :root {
+            --bg-color: #0F1113;
+            --accent-red: #B0000B;
+            --button-dark: #2A2D30;
+            --text-main: #E6E6E6;
+            --text-dim: #848484;
+            /* Cor extraída da nova imagem */
+            --scholar-green: #14531E; 
+        }
+
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #1F2124;
-            color: #E6E6E6;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,150 +31,141 @@
         }
 
         .container {
-            background-color: #2D3034;
-            padding: 40px 35px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            max-width: 650px;
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+            max-width: 500px;
             width: 100%;
             text-align: center;
-            border: 1px solid #3A3D42;
         }
 
         h1 {
-            font-family: 'Merriweather', serif;
-            color: #C0C0C0;
-            margin-bottom: 25px;
-            font-size: 2.2em;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-transform: uppercase;
         }
 
         p {
-            font-family: 'Merriweather', serif;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            color: #D3D3D3;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            color: var(--text-dim);
+            text-transform: uppercase;
         }
 
-        /* Estrutura de Busca */
         .search-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             width: 100%;
         }
 
         .search-box input[type="text"] {
-            width: 90%;
-            max-width: 480px;
-            padding: 14px 20px;
-            border: 1px solid #4A4D51;
-            border-radius: 5px;
-            font-size: 1.1em;
-            background-color: #383B3F;
-            color: #E6E6E6;
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            background-color: var(--button-dark);
+            color: white;
             outline: none;
-            transition: all 0.3s ease;
+            text-align: center;
+            box-sizing: border-box;
         }
 
-        .search-box input[type="text"]:focus {
-            border-color: #8C9CAE;
-            box-shadow: 0 0 0 3px rgba(140, 156, 174, 0.2);
-        }
-
-        /* Grupos de Botões */
         .button-row {
             display: flex;
-            gap: 12px;
-            width: 90%;
-            max-width: 480px;
-            justify-content: center;
+            gap: 15px;
+            width: 100%;
         }
 
-        .search-box button {
+        button {
             flex: 1;
-            padding: 12px 10px;
-            background-color: #5A6A7D;
-            color: white;
+            padding: 18px 10px;
             border: none;
-            border-radius: 5px;
-            font-size: 0.90em;
-            font-weight: 600;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            white-space: nowrap;
+            transition: transform 0.2s, filter 0.2s;
+            letter-spacing: 1px;
         }
 
-        /* Diferenciação de Cores */
-        .btn-epub-group button { background-color: #4A5868; }
-        .btn-scholar { 
-            background-color: #617D5A !important; /* Tom verde oliva para acadêmico */
-            width: 90%;
-            max-width: 480px;
+        .btn-primary { background-color: var(--accent-red); color: white; }
+        .btn-secondary { background-color: var(--button-dark); color: var(--text-main); }
+
+        /* Botão atualizado com a cor da imagem */
+        .btn-scholar {
+            width: 100%;
+            background-color: var(--scholar-green);
+            color: white;
+            margin-top: 10px;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.2);
         }
 
-        .search-box button:hover {
-            opacity: 0.9;
+        button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            filter: brightness(1.1);
+        }
+
+        .footer-info {
+            margin-top: 40px;
+            font-size: 0.7em;
+            color: var(--text-dim);
+            letter-spacing: 2px;
         }
 
         @media (max-width: 500px) {
-            .button-row { flex-direction: column; gap: 8px; }
-            .search-box button { width: 100%; }
+            .button-row { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Pesquisador Digital</h1>
-        <p>Busque livros em PDF/EPUB ou pesquise no Google Acadêmico.</p>
 
+    <div class="container">
+        <p>Modo de Busca</p>
+        <h1>Pesquisador</h1>
+        
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Nome do livro, autor ou tema científico...">
+            <input type="text" id="searchInput" placeholder="O QUE VOCÊ PROCURA?">
             
             <div class="button-row">
-                <button onclick="search('pdf', true)">PDF Direto</button>
-                <button onclick="search('pdf', false)">PDF Padrão</button>
+                <button class="btn-primary" onclick="search('pdf', true)">PDF Direto</button>
+                <button class="btn-secondary" onclick="search('pdf', false)">PDF Padrão</button>
             </div>
             
-            <div class="button-row btn-epub-group">
-                <button onclick="search('epub', true)">EPUB Direto</button>
-                <button onclick="search('epub', false)">EPUB Padrão</button>
+            <div class="button-row">
+                <button class="btn-primary" onclick="search('epub', true)">EPUB Direto</button>
+                <button class="btn-secondary" onclick="search('epub', false)">EPUB Padrão</button>
             </div>
 
             <button class="btn-scholar" onclick="searchScholar()">Pesquisa Acadêmica (Scholar)</button>
         </div>
+
+        <div class="footer-info">
+            BIBLIOTECA DIGITAL • 2026
+        </div>
     </div>
 
     <script>
+        // ... (funções search e searchScholar permanecem as mesmas)
         function search(format, lucky) {
             const term = document.getElementById('searchInput').value.trim();
-            if (!term) {
-                alert('Por favor, digite o que deseja buscar.');
-                return;
-            }
-
+            if (!term) return;
             const encoded = encodeURIComponent(term);
             let url = `https://www.google.com/search?q=${encoded}+filetype:${format}`;
-            
             if (lucky) url += '&btnI=1';
-
             window.open(url, '_blank');
         }
 
         function searchScholar() {
             const term = document.getElementById('searchInput').value.trim();
-            if (!term) {
-                alert('Por favor, digite um tema para a pesquisa acadêmica.');
-                return;
-            }
-
+            if (!term) return;
             const encoded = encodeURIComponent(term);
-            // URL específica para o Google Scholar
             const url = `https://scholar.google.com/scholar?hl=pt-BR&q=${encoded}`;
-            
             window.open(url, '_blank');
         }
 
