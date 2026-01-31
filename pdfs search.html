@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Biblioteca Digital (Kindle Dark)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Estilos Base Kindle Dark */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #1F2124;
+            color: #E6E6E6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #2D3034;
+            padding: 40px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            border: 1px solid #3A3D42;
+        }
+
+        h1 {
+            font-family: 'Merriweather', serif;
+            color: #C0C0C0;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+        }
+
+        p {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #D3D3D3;
+        }
+
+        /* Estrutura de Busca */
+        .search-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .search-box input[type="text"] {
+            width: 90%;
+            max-width: 480px;
+            padding: 14px 20px;
+            border: 1px solid #4A4D51;
+            border-radius: 5px;
+            font-size: 1.1em;
+            background-color: #383B3F;
+            color: #E6E6E6;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input[type="text"]:focus {
+            border-color: #8C9CAE;
+            box-shadow: 0 0 0 3px rgba(140, 156, 174, 0.2);
+        }
+
+        /* Grupos de Botões */
+        .button-row {
+            display: flex;
+            gap: 12px;
+            width: 90%;
+            max-width: 480px;
+            justify-content: center;
+        }
+
+        .search-box button {
+            flex: 1;
+            padding: 12px 10px;
+            background-color: #5A6A7D;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.90em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        /* Diferenciação de Cores */
+        .btn-epub-group button { background-color: #4A5868; }
+        .btn-scholar { 
+            background-color: #617D5A !important; /* Tom verde oliva para acadêmico */
+            width: 90%;
+            max-width: 480px;
+        }
+
+        .search-box button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 500px) {
+            .button-row { flex-direction: column; gap: 8px; }
+            .search-box button { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pesquisador Digital</h1>
+        <p>Busque livros em PDF/EPUB ou pesquise no Google Acadêmico.</p>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Nome do livro, autor ou tema científico...">
+            
+            <div class="button-row">
+                <button onclick="search('pdf', true)">PDF Direto</button>
+                <button onclick="search('pdf', false)">PDF Padrão</button>
+            </div>
+            
+            <div class="button-row btn-epub-group">
+                <button onclick="search('epub', true)">EPUB Direto</button>
+                <button onclick="search('epub', false)">EPUB Padrão</button>
+            </div>
+
+            <button class="btn-scholar" onclick="searchScholar()">Pesquisa Acadêmica (Scholar)</button>
+        </div>
+    </div>
+
+    <script>
+        function search(format, lucky) {
+            const term = document.getElementById('searchInput').value.trim();
+            if (!term) {
+                alert('Por favor, digite o que deseja buscar.');
+                return;
+            }
+
+            const encoded = encodeURIComponent(term);
+            let url = `https://www.google.com/search?q=${encoded}+filetype:${format}`;
+            
+            if (lucky) url += '&btnI=1';
+
+            window.open(url, '_blank');
+        }
+
+        function searchScholar() {
+            const term = document.getElementById('searchInput').value.trim();
+            if (!term) {
+                alert('Por favor, digite um tema para a pesquisa acadêmica.');
+                return;
+            }
+
+            const encoded = encodeURIComponent(term);
+            // URL específica para o Google Scholar
+            const url = `https://scholar.google.com/scholar?hl=pt-BR&q=${encoded}`;
+            
+            window.open(url, '_blank');
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') search('pdf', true);
+        });
+    </script>
+</body>
+</html>
